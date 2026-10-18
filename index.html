@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Commodity Trading — A Quant Finance Career Guide</title>
+<meta name="description" content="An explainer site for commodity trading as a quantitative finance career: industry terminology, key skills, major exchanges, and career paths.">
+<style>
+  :root{
+    --bg:#0b1220;
+    --panel:#111a2e;
+    --panel2:#16223a;
+    --ink:#e8eef7;
+    --muted:#9fb0c8;
+    --accent:#f5b942;      /* gold */
+    --accent2:#3fbf8f;     /* green */
+    --accent3:#5aa9ff;     /* blue */
+    --danger:#ff7a6e;
+    --line:#243352;
+    --radius:14px;
+    --maxw:1120px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.65;
+  }
+  a{color:var(--accent3);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+
+  /* NAV */
+  nav{
+    position:sticky;top:0;z-index:50;background:rgba(11,18,32,.92);
+    backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+  }
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+  .logo{font-weight:800;letter-spacing:.4px;color:var(--ink)}
+  .logo span{color:var(--accent)}
+  .navlinks{display:flex;gap:18px;flex-wrap:wrap}
+  .navlinks a{color:var(--muted);font-size:.92rem;font-weight:600}
+  .navlinks a:hover{color:var(--ink);text-decoration:none}
+
+  /* HERO */
+  header{padding:84px 0 64px;border-bottom:1px solid var(--line);
+    background:radial-gradient(1200px 500px at 15% -10%,rgba(245,185,66,.12),transparent 60%),
+               radial-gradient(900px 420px at 90% 0%,rgba(90,169,255,.10),transparent 60%);}
+  .kicker{display:inline-block;font-size:.78rem;font-weight:700;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--accent);border:1px solid rgba(245,185,66,.4);
+    padding:6px 12px;border-radius:999px;margin-bottom:20px}
+  h1{font-size:clamp(2rem,5vw,3.3rem);line-height:1.15;font-weight:800;margin-bottom:16px}
+  h1 em{font-style:normal;color:var(--accent)}
+  .sub{color:var(--muted);font-size:1.1rem;max-width:760px;margin-bottom:28px}
+  .chips{display:flex;gap:10px;flex-wrap:wrap}
+  .chip{background:var(--panel);border:1px solid var(--line);border-radius:999px;
+    padding:8px 16px;font-size:.88rem;color:var(--muted)}
+  .chip b{color:var(--ink)}
+
+  /* SECTIONS */
+  section{padding:64px 0;border-bottom:1px solid var(--line)}
+  section:nth-of-type(even){background:linear-gradient(180deg,rgba(255,255,255,.015),transparent)}
+  .sec-head{margin-bottom:34px}
+  .sec-num{font-size:.8rem;font-weight:800;letter-spacing:.18em;color:var(--accent2);text-transform:uppercase}
+  h2{font-size:clamp(1.5rem,3.4vw,2.2rem);font-weight:800;margin:6px 0 10px}
+  .lead{color:var(--muted);max-width:820px}
+
+  /* CARDS / GRIDS */
+  .grid{display:grid;gap:18px}
+  .g3{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+  .g2{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px}
+  .card h3{font-size:1.06rem;margin-bottom:8px;display:flex;align-items:center;gap:10px}
+  .card p{color:var(--muted);font-size:.95rem}
+  .ico{width:38px;height:38px;border-radius:10px;display:inline-flex;align-items:center;
+    justify-content:center;font-size:1.15rem;background:var(--panel2);border:1px solid var(--line);flex:none}
+
+  /* GLOSSARY */
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+  .tab{background:var(--panel);border:1px solid var(--line);color:var(--muted);
+    padding:8px 16px;border-radius:999px;font-size:.88rem;font-weight:600;cursor:pointer}
+  .tab.active{background:var(--accent);color:#1a1405;border-color:var(--accent)}
+  details{background:var(--panel);border:1px solid var(--line);border-radius:10px;
+    padding:14px 18px;margin-bottom:10px}
+  details summary{cursor:pointer;font-weight:700;list-style:none;display:flex;
+    justify-content:space-between;align-items:center;gap:10px}
+  details summary::-webkit-details-marker{display:none}
+  details summary::after{content:"+";color:var(--accent);font-weight:800;font-size:1.1rem}
+  details[open] summary::after{content:"–"}
+  details .term-tag{font-size:.72rem;font-weight:700;color:var(--accent3);
+    border:1px solid rgba(90,169,255,.35);border-radius:999px;padding:2px 10px;margin-left:auto}
+  details p{color:var(--muted);margin-top:10px;font-size:.94rem}
+  .hidden{display:none}
+
+  /* TABLES */
+  table{width:100%;border-collapse:collapse;background:var(--panel);
+    border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;font-size:.93rem}
+  th{background:var(--panel2);text-align:left;padding:13px 16px;font-size:.8rem;
+    letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+  td{padding:13px 16px;border-top:1px solid var(--line);vertical-align:top}
+  td b{color:var(--ink)}
+  td .exch{font-weight:800;color:var(--accent)}
+  .tbl-scroll{overflow-x:auto;border-radius:var(--radius)}
+
+  /* SKILLS */
+  .skill{margin-bottom:16px}
+  .skill .row{display:flex;justify-content:space-between;font-size:.9rem;margin-bottom:6px}
+  .skill .row span:last-child{color:var(--muted)}
+  .bar{height:9px;background:var(--panel2);border:1px solid var(--line);border-radius:999px;overflow:hidden}
+  .bar i{display:block;height:100%;border-radius:999px;
+    background:linear-gradient(90deg,var(--accent2),var(--accent3))}
+
+  /* PATH */
+  .path{position:relative;padding-left:34px}
+  .path::before{content:"";position:absolute;left:11px;top:6px;bottom:6px;width:2px;
+    background:linear-gradient(180deg,var(--accent),var(--accent3))}
+  .step{position:relative;margin-bottom:26px;background:var(--panel);
+    border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px}
+  .step::before{content:"";position:absolute;left:-29px;top:26px;width:14px;height:14px;
+    border-radius:50%;background:var(--accent);border:3px solid var(--bg)}
+  .step h3{font-size:1.05rem;margin-bottom:4px}
+  .step .meta{font-size:.8rem;color:var(--accent2);font-weight:700;letter-spacing:.05em;margin-bottom:8px}
+  .step p{color:var(--muted);font-size:.94rem}
+
+  /* CALLOUT */
+  .callout{border-left:4px solid var(--accent);background:var(--panel);
+    border-radius:0 var(--radius) var(--radius) 0;padding:18px 22px;margin-top:26px}
+  .callout b{color:var(--accent)}
+
+  footer{padding:46px 0 60px;color:var(--muted);font-size:.9rem}
+  footer .links{display:flex;gap:16px;flex-wrap:wrap;margin-top:10px}
+  @media (max-width:640px){ .navlinks{display:none} }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="logo">C<span>O</span>MEX·Quant <span style="color:var(--muted);font-weight:500;font-size:.85rem">career guide</span></div>
+    <div class="navlinks">
+      <a href="#overview">Overview</a>
+      <a href="#glossary">Glossary</a>
+      <a href="#skills">Skills</a>
+      <a href="#exchanges">Exchanges</a>
+      <a href="#strategies">Strategies</a>
+      <a href="#career">Career Path</a>
+      <a href="#resources">Resources</a>
+    </div>
+  </div>
+</nav>
+
+<header id="overview">
+  <div class="wrap">
+    <span class="kicker">Quantitative Finance · Commodities Desk</span>
+    <h1>Commodity Trading<br>as a <em>Quant Finance</em> Career</h1>
+    <p class="sub">A practical explainer for aspiring quants who want to trade the world's real assets —
+    crude oil, natural gas, metals, grains, softs and power. What the desks actually do, the language they speak,
+    the skills that get you hired, where these contracts trade, and how the career ladder works.</p>
+    <div class="chips">
+      <div class="chip"><b>~$13T+</b> notional in listed commodity futures & options</div>
+      <div class="chip"><b>Physical + financial</b> hybrid markets</div>
+      <div class="chip"><b>Volatility-rich</b>, supply/demand-driven alpha</div>
+      <div class="chip"><b>CTA / vol-meat / structuring</b> career lanes</div>
+    </div>
+  </div>
+</header>
+
+<!-- ==================== WHAT IS COMMODITY TRADING ==================== -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num">01 · The Market</div>
+      <h2>What is commodity trading?</h2>
+      <p class="lead">Commodities are interchangeable physical goods — energy, metals, agriculture — traded on
+      organized exchanges via futures and options, or over-the-counter via swaps and forwards. Unlike equities,
+      commodities cannot be valued with discounted cash flows: their price is set by physical supply, demand,
+      inventories, seasonality and logistics. That makes them a uniquely quantitative playground where data,
+      modeling and market microstructure matter more than corporate fundamentals.</p>
+    </div>
+    <div class="grid g3">
+      <div class="card">
+        <h3><span class="ico">⚡</span>Energy</h3>
+        <p>WTI & Brent crude, heating oil, gasoline cracks, natural gas (Henry Hub, TTF, JKM), power, coal.
+        The most volatile complex — weather, geopolitics and storage constraints drive outsized moves.</p>
+      </div>
+      <div class="card">
+        <h3><span class="ico">🥇</span>Metals</h3>
+        <p>Precious (gold, silver) and industrial/base (copper, aluminum, zinc, nickel) plus emerging battery
+        metals (lithium, cobalt). LME and COMEX dominate; contango/backwardation structures are heavily modeled.</p>
+      </div>
+      <div class="card">
+        <h3><span class="ico">🌾</span>Agriculture & Softs</h3>
+        <p>Grains (wheat, corn, soybeans), oilseeds, sugar, coffee, cocoa, cotton, live & feeder cattle.
+        CBOT/CME is the hub; weather models, crop condition data and crush/spread relationships drive quant strategies.</p>
+      </div>
+    </div>
+    <div class="callout">
+      <b>Why quants fit here:</b> commodity prices mean-revert within seasons, trend across cycles, and react to
+      observable physical data (EIA inventories, USDA crops, weather). That creates statistically testable edges —
+      carry, term-structure, spread and volatility trading — which is exactly the toolkit of a quantitative trader.
+    </div>
+  </div>
+</section>
+
+<!-- ==================== GLOSSARY ==================== -->
+<section id="glossary">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num">02 · Speak The Language</div>
+      <h2>Industry terminology decoder</h2>
+      <p class="lead">Filter by category. Every desk interview assumes you know these cold.</p>
+    </div>
+
+    <div class="tabs" id="tabs">
+      <button class="tab active" data-cat="all">All</button>
+      <button class="tab" data-cat="structure">Market Structure</button>
+      <button class="tab" data-cat="pricing">Pricing & Curves</button>
+      <button class="tab" data-cat="risk">Risk & Margin</button>
+      <button class="tab" data-cat="physical">Physical & Logistics</button>
+      <button class="tab" data-cat="quant">Quant & Stats</button>
+    </div>
+
+    <div id="glossary-list">
+      <!-- structure -->
+      <details data-cat="structure"><summary>Futures contract <span class="term-tag">Structure</span></summary>
+        <p>A standardized agreement to buy/sell a commodity at a set price on a future date, traded on an exchange.
+        Terms include the underlying, contract size (e.g., 1,000 bbl WTI), tick size, delivery month and settlement method.</p></details>
+      <details data-cat="structure"><summary>Front month / deferred months <span class="term-tag">Structure</span></summary>
+        <p>The nearest expiring contract ("front") and later-dated ones ("deferreds"). Quants "roll" positions before
+        expiry to maintain exposure; roll timing and liquidity shifts are tradable effects in themselves.</p></details>
+      <details data-cat="structure"><summary>Open interest <span class="term-tag">Structure</span></summary>
+        <p>Total outstanding contracts not yet offset. Rising open interest with rising prices confirms trend strength;
+        falling OI signals position unwind. A core feature in CTA signal construction.</p></details>
+      <details data-cat="structure"><summary>Volume vs. liquidity <span class="term-tag">Structure</span></summary>
+        <p>Volume is daily trades; liquidity is how much you can trade without moving price. Thin deferred months
+        force quants to model market impact explicitly when building multi-month portfolios.</p></details>
+      <details data-cat="structure"><summary>Cleared vs. OTC <span class="term-tag">Structure</span></summary>
+        <p>Exchange-traded futures/options are cleared through a CCP (near-zero counterparty risk); swaps and forwards
+        are OTC, increasingly cleared or collateralized post-Dodd-Frank/EMIR. Each leg has different funding and credit costs.</p></details>
+
+      <!-- pricing -->
+      <details data-cat="pricing"><summary>Contango <span class="term-tag">Pricing</span></summary>
+        <p>Forward curve upward-sloping: deferred prices above spot/front. Signals oversupply and high inventories.
+        Long holders lose on the "roll yield" — a negative carry trap for naive index buyers.</p></details>
+      <details data-cat="pricing"><summary>Backwardation <span class="term-tag">Pricing</span></summary>
+        <p>Curve downward-sloping: spot above deferred. Signals tightness; longs earn positive roll yield ("convenience yield").
+        The classic scarcity signature in oil, gas and ags.</p></details>
+      <details data-cat="pricing"><summary>Roll yield / collateral yield <span class="term-tag">Pricing</span></summary>
+        <p>The return earned (or lost) by rolling a futures position through the curve. Total commodity index return =
+        spot change + roll yield + collateral yield. Decomposing it is bread-and-butter quant analysis.</p></details>
+      <details data-cat="pricing"><summary>Basis <span class="term-tag">Pricing</span></summary>
+        <p>Local physical price minus the reference futures price (e.g., Cushing WTI vs NYMEX CL, Brazilian coffee vs KC).
+        Basis trading monetizes location and quality differences with relatively low directional risk.</p></details>
+      <details data-cat="pricing"><summary>Crack spread <span class="term-tag">Pricing</span></summary>
+        <p>Refinery margin: value of products (gasoline, heating oil) minus cost of crude. Traded as crack spreads (e.g., 3-2-1).
+        A mean-reverting relative-value staple of energy quant desks.</p></details>
+      <details data-cat="pricing"><summary>Spark spread <span class="term-tag">Pricing</span></summary>
+        <p>Power plant margin: electricity price minus fuel (gas/coal) cost adjusted for heat rate. The core P&L driver
+        — and core hedging unit — for utility and commodity power traders.</p></details>
+      <details data-cat="pricing"><summary>Corn crush / soybean crush <span class="term-tag">Pricing</span></summary>
+        <p>Processing margin from crushing soybeans into meal and oil (analogous for corn into ethanol/DDGS).
+        Crush spreads are liquid, modelable pairs on CBOT.</p></details>
+      <details data-cat="pricing"><summary>EFP / EFS <span class="term-tag">Pricing</span></summary>
+        <p>Exchange-for-Physical / Exchange-for-Swap: mechanisms to convert between futures positions and physical or
+        swap positions at a negotiated basis. Bridges the paper and physical worlds.</p></details>
+      <details data-cat="pricing"><summary>Convergence <span class="term-tag">Pricing</span></summary>
+        <p>The tendency of futures price to meet spot at expiry (cost of carry pulls them together).
+        Failure of convergence usually flags a delivery-point squeeze or logistics bottleneck.</p></details>
+
+      <!-- risk -->
+      <details data-cat="risk"><summary>Initial & variation margin <span class="term-tag">Risk</span></summary>
+        <p>Initial margin is the performance bond posted per contract; variation margin is daily mark-to-market cash flow.
+        Quants must model margin spikes — vol regimes can double requirements overnight and force deleveraging.</p></details>
+      <details data-cat="risk"><summary>Maintenance margin & margin call <span class="term-tag">Risk</span></summary>
+        <p>The floor below which equity must not fall; breach triggers a call to top back up to initial margin.
+        Forced liquidations at this boundary create momentum cascades — a known microstructure effect.</p></details>
+      <details data-cat="risk"><summary>VaR / CVaR <span class="term-tag">Risk</span></summary>
+        <p>Value-at-Risk: worst expected loss at a confidence level over a horizon. CVaR/ES measures tail severity beyond VaR.
+        Commodity VaR needs fat-tailed, jump-diffusion treatment because prices gap on inventory prints and geopolitical shocks.</p></details>
+      <details data-cat="risk"><summary>Greeks (delta, gamma, vega, theta) <span class="term-tag">Risk</span></summary>
+        <p>Sensitivities of option value to underlying, vol and time. Commodity options add "dollar Greeks" nuance because
+        underlying is a storable good with its own curve dynamics.</p></details>
+      <details data-cat="risk"><summary>Stop-loss & kill switches <span class="term-tag">Risk</span></summary>
+        <p>Pre-defined loss thresholds that automatically flatten a book. Systematic desks enforce hard max-drawdown
+        limits and portfolio-level de-grossing rules.</p></details>
+      <details data-cat="risk"><summary>Counterparty credit risk <span class="term-tag">Risk</span></summary>
+        <p>Risk an OTC counterparty defaults. Managed via CSA netting agreements, collateral, credit lines and XVA charges.
+        Physically oriented firms (Traders & refiners) run large private books of bilateral credit.</p></details>
+      <details data-cat="risk"><summary>Squeeze / corner <span class="term-tag">Risk</span></summary>
+        <p>When a dominant long forces shorts to cover at any price near expiry (e.g., nickel/LME 2022, oil derivatives).
+        Position-limit rules and delivery-network analysis exist precisely to bound this risk.</p></details>
+
+      <!-- physical -->
+      <details data-cat="physical"><summary>Deliverable grade & warrants <span class="term-tag">Physical</span></summary>
+        <p>Exact quality specs a contract accepts for delivery; warehouse receipts ("warrants") prove stored metal/ag is deliverable.
+        Deliverability drives quality premiums and inter-month spreads.</p></details>
+      <details data-cat="physical"><summary>Delivery point & freight <span class="term-tag">Physical</span></summary>
+        <p>Where a contract physically settles (Cushing for WTI, Rotterdam/ARA for fuels). Freight differentials between hubs
+        create tradable arbitrage (e.g., Brent-Dubai EFS, TTF–Henry Hub spreads).</p></details>
+      <details data-cat="physical"><summary>Storage & carrying costs <span class="term-tag">Physical</span></summary>
+        <p>Rent, insurance, financing and spoilage. Full-cost-of-carry links spot and futures: F = S·e^{(r+u−y)T}.
+        Storage capacity itself is priced — full tanks collapse contango; empty ones widen it.</p></details>
+      <details data-cat="physical"><summary>Inventories & stocks-to-use <span class="term-tag">Physical</span></summary>
+        <p>Reported holdings (EIA weekly crude/gas, LME warehouse stocks, USDA stocks-to-use ratios). Low stocks amplify
+        price sensitivity to supply shocks — a leading indicator engineered into many quant signals.</p></details>
+      <details data-cat="physical"><summary>Seasonality <span class="term-tag">Physical</span></summary>
+        <p>Recurring calendar patterns: gas builds in summer/winters off, harvest pressure on grain, hurricane season in the Gulf.
+        Seasonal decomposition is one of the oldest systematic commodity edges.</p></details>
+      <details data-cat="physical"><summary>Hedging (long/short) <span class="term-tag">Physical</span></summary>
+        <p>Producers short futures to lock sale prices; consumers go long to cap input costs. Hedgers supply the risk
+        transfer that speculators/quants are paid to absorb.</p></details>
+      <details data-cat="physical"><summary>Arbitrage <span class="term-tag">Physical</span></summary>
+        <p>Riskless-ish profit from price inconsistencies: calendar spreads, location arb (netback), quality arb,
+        cash-and-carry. Competition compresses arb windows to milliseconds — hence the quant arms race.</p></details>
+
+      <!-- quant -->
+      <details data-cat="quant"><summary>CTA / managed futures <span class="term-tag">Quant</span></summary>
+        <p>Commodity Trading Advisors run systematic trend/momentum programs across futures markets. Time-series and
+        cross-sectional momentum remain the largest documented commodity factor.</p></details>
+      <details data-cat="quant"><summary>Term-structure / carry factor <span class="term-tag">Quant</span></summary>
+        <p>Going long steeply backwardated markets and short contango ones harvest roll yield. One of the few factors
+        that works specifically because commodities are physically stored, not cash-flowed.</p></details>
+      <details data-cat="quant"><summary>Mean reversion <span class="term-tag">Quant</span></summary>
+        <p>Prices/spreads pulling back to fair value (crack spreads, inter-month spreads, after inventory shocks).
+        Half-life estimation and regime detection decide when reversion is tradeable vs. structural break.</p></details>
+      <details data-cat="quant"><summary>Alt-data <span class="term-tag">Quant</span></summary>
+        <p>Satellite imagery (tank shadows, crop NDVI), AIS ship tracking, pipeline flow telemetry, weather ensembles.
+        Modern commodity quants compete on data pipelines as much as models.</p></details>
+      <details data-cat="quant"><summary>Backtesting & overfitting <span class="term-tag">Quant</span></summary>
+        <p>Simulating strategies on history. Commodity backtests must handle contract rolls, changing margin, survivorship
+        of listings and non-stationarity — otherwise results are fantasy.</p></details>
+      <details data-cat="quant"><summary>Volatility trading / vol-meat <span class="term-tag">Quant</span></summary>
+        <p>Trading implied vs realized vol, dispersion and skew rather than direction. Energy vol books (gas, power) are
+        among the most technically demanding seats on any desk.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SKILLS ==================== -->
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num">03 · The Toolkit</div>
+      <h2>Key skills required</h2>
+      <p class="lead">Commodity quants sit at the intersection of mathematics, software and physical-market intuition.
+      Roughly what hiring managers weight:</p>
+    </div>
+    <div class="grid g2">
+      <div class="card">
+        <div class="skill"><div class="row"><span>Probability & statistics (time series, Bayesian updating)</span><span>Core</span></div><div class="bar"><i style="width:95%"></i></div></div>
+        <div class="skill"><div class="row"><span>Stochastic calculus & derivatives pricing</span><span>Core</span></div><div class="bar"><i style="width:85%"></i></div></div>
+        <div class="skill"><div class="row"><span>Machine learning (gradient boosting, deep nets, NLP on news/weather)</span><span>High</span></div><div class="bar"><i style="width:80%"></i></div></div>
+        <div class="skill"><div class="row"><span>Optimization & portfolio construction</span><span>High</span></div><div class="bar"><i style="width:78%"></i></div></div>
+      </div>
+      <div class="card">
+        <div class="skill"><div class="row"><span>Python (pandas, numpy, statsmodels) — research & production</span><span>Must-have</span></div><div class="bar"><i style="width:97%"></i></div></div>
+        <div class="skill"><div class="row"><span>C++ / Rust — execution & low-latency systems</span><span>Strong plus</span></div><div class="bar"><i style="width:72%"></i></div></div>
+        <div class="skill"><div class="row"><span>SQL + data engineering (tick data, curves, inventories)</span><span>Must-have</span></div><div class="bar"><i style="width:88%"></i></div></div>
+        <div class="skill"><div class="row"><span>Domain sense: curves, storage, logistics, regulation</span><span>Differentiator</span></div><div class="bar"><i style="width:75%"></i></div></div>
+      </div>
+    </div>
+    <div class="grid g3" style="margin-top:18px">
+      <div class="card"><h3><span class="ico">🧮</span>Mathematics</h3><p>Linear algebra, stochastic processes (GBM, OU jumps — the workhorse models for mean-reverting commodity prices), Monte Carlo, statistical arbitrage theory, cointegration/Kalman filters for spreads.</p></div>
+      <div class="card"><h3><span class="ico">💻</span>Engineering</h3><p>Backtesting frameworks, event-driven architectures, kdb+/ClickHouse for tick storage, cloud pipelines (AWS/GCP), CI for trading code, and enough networking to reason about latency.</p></div>
+      <div class="card"><h3><span class="ico">🗣️</span>Communication & grit</h3><p>Explaining a model's edge to PMs and risk managers, writing crisp trade rationales, staying disciplined through drawdowns. Desks hire people they trust under pressure.</p></div>
+    </div>
+    <div class="callout"><b>Certifications that help (but don't substitute for a track record):</b>
+    CFA (general investing literacy), FRM (risk), professional weather trader (PWT) for energy/ag niches, and above all —
+    a reproducible research portfolio: your own backtested commodity strategy with honest transaction costs.</div>
+  </div>
+</section>
+
+<!-- ==================== EXCHANGES ==================== -->
+<section id="exchanges">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num">04 · Where It Trades</div>
+      <h2>Major exchanges & venues</h2>
+      <p class="lead">The global plumbing of commodity price discovery. Know the flagship contracts — interviews love them.</p>
+    </div>
+    <div class="tbl-scroll">
+    <table>
+      <thead><tr><th>Venue</th><th>Group / Hub</th><th>Flagship commodity markets</th><th>Signature contracts</th></tr></thead>
+      <tbody>
+        <tr><td><span class="exch">CME Group</span></td><td>CME · CBOT · NYMEX · COMEX (Chicago/NY)</td>
+            <td>Largest overall: ags, energy, metals, plus livestock & environmental</td>
+            <td><b>WTI Crude (CL)</b>, Henry Hub Gas (NG), Soybeans/Corn/Wheat (ZS/ZC/ZW), Gold (GC), Live Cattle (LE)</td></tr>
+        <tr><td><span class="exch">ICE</span></td><td>Intercontinental Exchange (London/Atlanta)</td>
+            <td>Brent complex, softs, European energy & emissions</td>
+            <td><b>Brent Crude (B)</b>, UK Natural Gas, Coffee (KC), Sugar (SB), Cotton (CT), EUA carbon</td></tr>
+        <tr><td><span class="exch">LME</span></td><td>London Metal Exchange</td>
+            <td>The global benchmark for base/industrial metals; unique continuous forward dates</td>
+            <td><b>Copper (CA)</b>, Aluminium, Nickel, Zinc, Lead, Cobalt</td></tr>
+        <tr><td><span class="exch">EEX</span></td><td>European Energy Exchange (Leipzig)</td>
+            <td>European power, gas and coal benchmarks</td>
+            <td><b>Baseload Power (PH)</b>, TTF-related derivatives, Coal</td></tr>
+        <tr><td><span class="exch">DCE</span></td><td>Dalian Commodity Exchange (China)</td>
+            <td>China's iron ore, black metals & ags — price reflection of the world's biggest importer</td>
+            <td><b>Iron Ore (I)</b>, Rebar Steel, Soybean Oil/M Meal, Corn</td></tr>
+        <tr><td><span class="exch">SHFE / INE</span></td><td>Shanghai Futures Exchange / Shanghai Int'l Energy</td>
+            <td>Chinese metals + internationalized crude & battery metals</td>
+            <td><b>INE Crude (SC)</b>, Copper (CU), Gold, Lithium Carbonate</td></tr>
+        <tr><td><span class="exch">MCX</span></td><td>Multi Commodity Exchange (India)</td>
+            <td>World's largest by contracts traded; precious metals & ags for Indian demand</td>
+            <td><b>Gold (petagram)</b>, Silver, Crude Oil, Natural Gas</td></tr>
+        <tr><td><span class="exch">TOCOM / OSE</span></td><td>Tokyo / Osaka (Japan Exchange Group)</td>
+            <td>Asian metals, rubber, energy refs</td>
+            <td>Rubber (RSS3), Crude Oil (Kilo), Gold</td></tr>
+        <tr><td><span class="exch">ASX / SGX</span></td><td>Australia / Singapore</td>
+            <td>Resources-heavy Antipodean & Asian niche markets</td>
+            <td>ASX Wheat, LNG-linked derivatives (SGX Platts JKM)</td></tr>
+        <tr><td><span class="exch">B3 / BMF</span></td><td>Brazil</td>
+            <td>Softs powerhouse from the origin side</td>
+            <td>Coffee (Arabica), Sugar, Soybeans, Cattle</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="grid g3" style="margin-top:22px">
+      <div class="card"><h3><span class="ico">🏦</span>Clearing houses</h3><p>CME Clearing, LCH, ICE Clear Europe/US guarantee trades. Understanding CCP margin methodology (SPAN, VaR-based) is essential for sizing leveraged commodity books.</p></div>
+      <div class="card"><h3><span class="ico">📰</span>Price reporting agencies</h3><p>Platts (S&P Global), Argus, ICIS publish the physical assessments that index swaps and EFPs. Quants model PRB methodology to avoid benchmark manipulation risk (and exploit assessment windows).</p></div>
+      <div class="card"><h3><span class="ico">🛰️</span>Data vendors</h3><p>Refinitiv/Eikon, Bloomberg, Kpler/Vortexa (shipping), OroraTech/planet labs (satellite), NOAA/ECMWF (weather). Alpha often starts with which dataset you license first.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== STRATEGIES ==================== -->
+<section id="strategies">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num">05 · How Money Is Made</div>
+      <h2>Quant strategy families on a commodity desk</h2>
+    </div>
+    <div class="grid g3">
+      <div class="card"><h3><span class="ico">📈</span>Trend / momentum (CTA)</h3><p>Time-series and cross-sectional momentum across 100+ futures. Slow decay, crisis-alpha profile. Entry seat for most systematic quants.</p></div>
+      <div class="card"><h3><span class="ico">🔄</span>Term-structure & carry</h3><p>Long backwardation, short contango; harvest roll yield; model convenience yield and storage optimization.</p></div>
+      <div class="card"><h3><span class="ico">↔️</span>Statistical arbitrage / spreads</h3><p>Crack, crush, spark spreads; inter-commodity (gas vs coal burn); pairs like gold/silver; cointegration and OU-based execution.</p></div>
+      <div class="card"><h3><span class="ico">🌪️</span>Event & data-alpha</h3><p>Positioning around EIA/USDA releases, weather models, refinery outage feeds; NLP on news; satellite inventory nowcasting.</p></div>
+      <div class="card"><h3><span class="ico">🎭</span>Volatility & optionality</h3><p>Implied-vs-realized vol, skew trades, straddle roll-downs, structured deals for corporates (vol meat desks).</p></div>
+      <div class="card"><h3><span class="ico">🏗️</span>Structuring / physical optimization</h3><p>Real-options valuation of storage, shipping arbitrage, tolling agreements — quant methods applied directly to physical assets.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== CAREER PATH ==================== -->
+<section id="career">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num">06 · The Ladder</div>
+      <h2>Career path in commodity quant finance</h2>
+      <p class="lead">Typical progression from campus hire to owning P&L. Timelines vary; skill gates don't.</p>
+    </div>
+    <div class="path">
+      <div class="step">
+        <h3>Quantitative Researcher / Analyst (0–3 yrs)</h3>
+        <div class="meta">Hedge funds · prop shops · bank quant teams</div>
+        <p>Signal research, data pipeline building, backtesting infrastructure, supporting senior PMs. You learn curves,
+        contract specs and the graveyard of failed ideas. Degree: MFin/Math/Stats/Physics/CS helpful, not always mandatory.</p>
+      </div>
+      <div class="step">
+        <h3>Quantitative Developer / Risk Analyst (parallel entry)</h3>
+        <div class="meta">Execution systems · market risk · margins</div>
+        <p>Production trading systems, curve calibration libraries, VaR/XVA, regulatory reporting (FRTB). Deep exit into
+        either research or trading once you understand how books really move.</p>
+      </div>
+      <div class="step">
+        <h3>Senior Researcher / Portfolio Manager (4–8 yrs)</h3>
+        <div class="meta">Own capital allocation</div>
+        <p>You run a sleeve: energy complex, grains, or cross-commodity factor portfolio. Accountable for Sharpe, drawdown,
+        capacity and cost. Hiring shifts from credentials to demonstrated live track record.</p>
+      </div>
+      <div class="step">
+        <h3>Commodity Trader (execution → discretionary/systematic hybrid)</h3>
+        <div class="meta">Banks · Vitol/Trafigura/Glencore · utilities</div>
+        <p>Physically-oriented firms offer a distinct route: junior trader → product specialist (crude, gas, metals) →
+        head of trading. Quant skills supercharge traditional roles — basis, freight and optimization desks now recruit programmers.</p>
+      </div>
+      <div class="step">
+        <h3>Desk Head / Partner / Fund Founder (10+ yrs)</h3>
+        <div class="meta">Own firm or lead a franchise</div>
+        <p>Launch a CTA/man-aged-futures fund, join as partner at a multi-strat, or lead a physical trading house's
+        quant function. Your edge becomes platform + talent + data moats, not just models.</p>
+      </div>
+    </div>
+
+    <div class="grid g3" style="margin-top:28px">
+      <div class="card"><h3><span class="ico">💰</span>Compensation snapshot</h3>
+        <p>Junior QR/QD: ~$120–250k total (prop/fund). Mid-level PM/trader: $300–800k with P&L bonuses scaling hard.
+        Senior fund PM/partner: seven figures driven by performance fees. Physical trading houses pay similarly with
+        larger upside on origination desks. Numbers vary by geography and firm economics.</p></div>
+      <div class="card"><h3><span class="ico">🎯</span>Who hires</h3>
+        <p>Millennium/Citadel/XTX/Two Sigma/Winton (systematic); Goldman/Morgan Stanley/Citi (bank desks);
+        Vitol, Trafigura, Glencore, Koch, Mercuria (physical); utilities & refiners (in-house trading);
+        CFTC/exchanges for market-structure roles.</p></div>
+      <div class="card"><h3><span class="ico">🧭</span>Breaking in</h3>
+        <p>Competitions ( Citadel Datathon, CME curriculum), research internships, a public backtest notebook,
+        arXiv/papers on term structure, and fluency in one commodity complex end-to-end (wellhead to tank to futures).</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== RESOURCES ==================== -->
+<section id="resources">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num">07 · Study List</div>
+      <h2>Recommended resources</h2>
+    </div>
+    <div class="grid g2">
+      <div class="card">
+        <h3><span class="ico">📚</span>Books</h3>
+        <p>• <b>Commodity Trading Manual</b> — CBOT (the field bible)<br>
+           • <b>The Elements of Quantitative Investing</b> — Kelly & Ratner<br>
+           • <b>Quantitative Momentum / Trend</b> — Gray & Carlisle<br>
+           • <b>Option Volatility & Pricing</b> — Natenberg<br>
+           • <b>Energy and Power Derivatives Explained</b> — Martin & Kamara<br>
+           • <b>Trading and Exchanges</b> — Larry Harris (market microstructure)</p>
+      </div>
+      <div class="card">
+        <h3><span class="ico">🌐</span>Data & practice</h3>
+        <p>• CME/Barchart historical settlement data (free)<br>
+           • EIA.gov & USDA WASDE (primary sources for energy/ag)<br>
+           • Kaggle weather & crop datasets for alt-data practice<br>
+           • QuantConnect / Zipline-style backtests on futures<br>
+           • Build: a rolling backtest engine that handles contract rolls correctly — instant interview talking point.</p>
+      </div>
+    </div>
+    <div class="callout"><b>Regulatory note:</b> US commodity futures are governed by the <b>CFTC</b> with position limits,
+    large-trader reporting and swap-dealing registration; Europe by <b>EMIR/MiFID II</b>. Quants designing systematic books
+    must bake in limit checks and reporting from day one.</div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="logo" style="margin-bottom:8px">C<span>O</span>MEX·Quant</div>
+    <p>An educational GitHub Pages project on commodity trading as a quantitative finance career.
+    Not investment advice. Built with plain HTML/CSS — deploy via GitHub Actions <code>pages</code> workflow.</p>
+    <div class="links">
+      <a href="https://www.cmegroup.com/" target="_blank" rel="noopener">CME Group</a>
+      <a href="https://www.theice.com/" target="_blank" rel="noopener">ICE</a>
+      <a href="https://www.lme.com/" target="_blank" rel="noopener">LME</a>
+      <a href="https://www.eia.gov/" target="_blank" rel="noopener">EIA Data</a>
+      <a href="https://www.cftc.gov/" target="_blank" rel="noopener">CFTC</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Glossary tab filtering
+  const tabs = document.querySelectorAll('.tab');
+  const terms = document.querySelectorAll('#glossary-list details');
+  tabs.forEach(t => t.addEventListener('click', () => {
+    tabs.forEach(x => x.classList.remove('active'));
+    t.classList.add('active');
+    const cat = t.dataset.cat;
+    terms.forEach(d => d.classList.toggle('hidden', cat !== 'all' && d.dataset.cat !== cat));
+  }));
+</script>
+</body>
+</html>
